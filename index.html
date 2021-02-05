@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<title>Vision chart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="galery.css">
+<script src="grid.js"></script>
+</head>
+<body>
+<script>
+	document.body.innerHTML ="";
+    var ex = document.createElement("div");
+    var grid = document.createElement("div");
+    var cendiv = document.createElement("div");
+    cendiv.classList.add("center");
+    grid.setAttribute("role", "grid");
+    grid.setAttribute("data-wrap-cols", "true");
+    grid.appendChild(cendiv);
+    ex.id = "ex";
+    ex.appendChild(grid);
+    document.body.appendChild(ex);
+    var i, j, k = 0;
+    var center = document.createElement("center");
+    for (i = 0; i < 4; i++) {
+        var row = document.createElement("div");
+        row.classList.add("row");
+        center.appendChild(row);
+    }
+    document.getElementsByClassName("center")[0].appendChild(center);
+
+	var c=[ ['', '&ensp;LANDOLT C', '&nbsp;TUMBLING E', '&ensp;&nbsp;SNELLEN', '&emsp;LOGMAR',   '&ensp;&nbsp;NUMERICS', '&nbsp;ALPHABETS' ],
+            ['', '&nbsp;RED GREEN', '&emsp;MADDOX',     '&ensp;CONTRAST',      'PERIPHERAL',     '&ensp;&nbsp;ISHIHARA', '&emsp;&emsp;ACC' ],
+            ['', '&emsp;&emsp;SC1', '&emsp;&emsp;SC2',  '&emsp;&emsp;SC3',     '&emsp;&emsp;SC4','&ensp;ASTIG FAN',      '&emsp;&ensp;DOTS'],
+            ['', '&ensp;PEDIATRIC', '&nbsp;EDUCATION',  '&ensp;&nbsp;CARTOON', '&emsp;ANIMALS',  '&nbsp;LANGUAGE1',      '&nbsp;LANGUAGE2' ] ];  
+
+    for (i = 0; i < 4; i++) {
+        for (j = 1; j < 7; j++) {
+            var span = document.createElement("span");
+            span.classList.add("gallery");
+            span.setAttribute("role", "gridcell");
+            var a = document.createElement("a");
+            a.setAttribute("tabindex", "-1");
+            k++;
+			a.href = "slideshow.html?value=" + (i+k);
+            var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+			var svgNS = svg.namespaceURI;
+			var g = document.createElementNS(svgNS,'g');
+			var circle = document.createElementNS(svgNS,'circle');
+			g.appendChild(circle);
+			var text = document.createElementNS(svgNS,'text');
+            text.setAttribute("font-family", "Optician Sans,Optician Sans_MSFontService,sans-serif");
+            text.setAttribute("font-weight", "400");
+            text.style.fontSize = "1.3vw";
+            text.style.transform = "translate(3.3vw,7.5vw)";
+            text.innerHTML = c[i][j];
+            g.appendChild(text);
+			var image = document.createElementNS(svgNS,'rect');
+			image.setAttribute("x", "4.3vw");
+			image.setAttribute("y", "2.3vw");
+			image.setAttribute("width", "5.5vw");
+			image.setAttribute("height", "4.3vw");
+			image.style = "fill:rgb(255,255,255);stroke-width:3;stroke:rgb(0,0,0)";
+			g.appendChild(image);
+			svg.appendChild(g);
+			a.appendChild(svg);
+            span.appendChild(a);
+            document.getElementsByClassName("row")[i].appendChild(span);
+        }
+        k--;
+    }
+    for (i = 0; i < 4; i++) {
+        var span = document.createElement("span");
+        span.classList.add("gallery");
+        span.setAttribute("role", "gridcell");
+        var a = document.createElement("a");
+        a.setAttribute("tabindex", "-1");
+        a.href = "img_lights.jpg";
+		var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        var svgNS = svg.namespaceURI;
+		var g = document.createElementNS(svgNS,'g');
+		var circle = document.createElementNS(svgNS,'circle');
+		g.appendChild(circle);
+		svg.appendChild(g);
+		a.appendChild(svg);
+        span.appendChild(a);
+        document.getElementsByClassName("row")[i].appendChild(span);
+    }
+</script>
+</body>
+</html>
